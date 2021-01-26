@@ -15,10 +15,10 @@ const http = require("http").createServer(app); //creating a port via app same u
 //pick code from public folder w ebought from frontend
 
 app.get("/", function (request, response) {
-    response.redirect("/index.js");
+    response.redirect("/index.ejs");
 })
 
-let port = process.env.PORT || 3000;
+let port = 3000;
 http.listen(port, () => {
     console.log('server is listening at 3000 port');
 });
