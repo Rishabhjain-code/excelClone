@@ -1,0 +1,3 @@
+write a app.js which runs on the heroku there wrote to run the index.ejs on get request there
+
+putted everythin else in public thus direct access from there

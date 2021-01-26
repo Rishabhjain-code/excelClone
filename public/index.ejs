@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Electron App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- .classname enter for making a div with class and use # when eith id -->
+    <div class="menu-container">
+        <img src="./images/logo.png" id="logo-image">
+        <div class="file">File</div>
+        <div class="home active-menu">Home</div>
+        <div class="view">View</div>
+    </div>
+
+    <div class="menu-options-container">
+        <div class="file-options">
+            <!-- File Options -->
+            <!-- <div class="new">
+                New
+            </div>
+            <div class="open">Open</div>
+            <div class="save">
+                Save
+            </div> -->
+            <button class="new">New</button>
+            <button class="open">Open</button>
+            <button class="save">Save</button>
+        </div>
+        <!-- <div class="home-options active">
+            <div class="font-props">
+                <select name="" id="font-type">
+                    <option value="">A</option>
+                    <option value="">B</option>
+                    <option value="">C</option>
+                    <option value="">D</option>
+                </select>
+
+                <div class="font-styling">
+                    <button id="bold">B</button>
+                    <button id="italic">I</button>
+                    <button id="underline">U</button>
+                </div>
+            </div>
+
+            <div class="font-color-size">
+                <select name="" id="font-size">
+                    <option value="10">10</option>
+                    <option value="12">12</option>
+                    <option value="14">14</option>
+                    <option value="16">16</option>
+                </select>
+                <div class="cell-color">
+                    <input type="color" name="" id="cell-font">
+                    <input type="color" name="" id="cell-background">
+                </div>
+            </div>
+
+            <div class="alignment">
+                <button id="left">L</button>
+                <button id="center">C</button>
+                <button id="right">R</button>
+            </div>
+
+
+        </div> -->
+
+        <div class="home-options active">
+            <select name="" id="font-type">
+                <option value="arial">Arial</option>
+                <option value="monospace">Monospace</option>
+                <option value="cursive">Cursive</option>
+                <option value="sans-serif">Sans-Serif</option>
+            </select>
+
+            <div class="font-styling">
+                <button id="bold"><b>B</b></button>
+                <button id="italic"><i>I</i></button>
+                <button id="underline"><u>U</u></button>
+            </div>
+
+            <select name="" id="font-size">
+                <%for(let i=10;i<42;i+=2){%>
+                <option value=<%=i%>><%=i%></option>
+                <%}%>
+                <!-- <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option> -->
+            </select>
+            <div class="cell-color">
+                <!-- https://www.w3schools.com/tags/att_input_type_color.asp#:~:text=The%20%3Cinput%20type%3D%22color,in%20seven%2Dcharacter%20hexadecimal%20notation. -->
+                <input type="color" value="#000000" name="" id="cell-font">
+                <!-- <div class="div">font</div> -->
+                <input type="color" value="#ffffff" name="" id="cell-background">
+            </div>
+
+            <div class="alignment">
+                <button id="left">L</button>
+                <button id="center">C</button>
+                <button id="right">R</button>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <div class="formula-input">
+        <img src="./images/formula.png" id="formula-image">
+        <input type="text" name="" id="address" disabled>
+        <input type="text" id="formula">
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <!-- top left cell -->
+            <div class="top-left-cell"></div>
+
+            <!-- top row 26 cols for A,B,C,D...-->
+            <div class="top-row">
+                <%for(let j=0;j<26;j++){%>
+                <div class="top-row-ele" cn=<%=j%>><%=(String.fromCharCode(j+65))%></div>
+                <%}%>
+            </div>
+
+            <!-- left col-->
+            <div class="left-col">
+                <%for(let j=0;j<100;j++){%>
+                <div class="left-col-ele" rn=<%=j%>><%=(j+1)%></div>
+                <%}%>
+            </div>
+
+            <div class="cells">
+                <!-- using ejs for looping in between the html code like here classes to all-->
+                <%for(let i=0;i<100;i++){%>
+                <div class="row">
+                    <%for(let j=0;j<26;j++){%>
+                    <!-- google it -> how to make a div editable in html -->
+                    <div contenteditable="true" class="cell" rn=<%=i%> cn=<%=j%>></div>
+                    <%}%>
+                </div>
+                    <%}%>
+                </div>
+        </div>
+    </div>
+
+    <div class="sheets">
+        <!-- Sheets -->
+        <div class="sheet-list">
+            <div class="sheet active-sheet">Sheet 1</div>
+            <!-- hardcoded for design -->
+            <!-- <div class="sheet">Sheet 2</div>
+            <div class="sheet">Sheet 3</div>
+            <div class="sheet">Sheet 4</div>
+            <div class="sheet">Sheet 5</div>
+            <div class="sheet">Sheet 6</div> -->
+            <!-- hardcoded for design -->
+            <div class="add-button">
+                <img src="./images/plus.png" id="plus-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- divs have no heights of themself they take of the elemnts in it  -->
+
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
+
+<!-- 
+.cells styling to .content as now all within it
+top-left-cell is a div thus 0 height width give it yourself (height acc to other cell)
+top rows 26 divs side by side thus give display = flex and text-align center as flex to parent div
+.left-col-cell height with as left right and border 1px solid to make it cell like and text-align center
+now work for positioing
+ -->

@@ -1,0 +1,330 @@
+/* TRICK TO ADD CSS ADD IN BORWSER ELEMNTS STYLES TAB THEN CHANGE IT THERE ONLY THEN COPY IT IN THE MAIN DOCUMENT */
+
+/* Moving Background START*/
+
+/* body {
+  background: linear-gradient(-45deg, #ebe996, #1bb6d1, #ddeb1e, #552aee);
+  background-size: 1000% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+} */
+
+/* Moving Background END */
+
+/* industry standard write name of all classes to avoid duplicacy */
+
+* {
+  box-sizing: border-box;
+  /* now it includes the border width in the height we gave to it suppose if 1px border then if given 40 px height then it will take 38px height itself */
+}
+
+head,
+body {
+  padding: 0%;
+  margin: 0%;
+}
+.file {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 48px;
+  background-color: green;
+  height: 26px;
+  left: 12px;
+  position: relative;
+}
+.view {
+  position: relative;
+  left: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.home {
+  position: relative;
+  left: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.menu-container {
+  border: 1px solid black;
+  background-color: silver;
+  height: 27px;
+  display: flex;
+  align-items: center;
+}
+.menu-options-container {
+  border: 1px solid;
+  height: 43px;
+  display: flex;
+  background-color: midnightblue;
+  align-items: center;
+}
+.file-options {
+  display: none;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 19%;
+}
+.home-options {
+  display: none;
+}
+.formula-input {
+  background-color: mintcream;
+  border: 1px solid;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  /* when you have display flex it will move the elements in the center wrt y-axis */
+}
+.menu-container div {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.menu-options-container div {
+  margin-left: 10px;
+}
+#formula {
+  width: 541px;
+}
+.row {
+  display: flex;
+}
+.cell {
+  border: 1px solid;
+  /* height: 20px;
+  width: 30px; */
+  /* as we gave display flex to its parent div thus no width and height work for these use min-width and min-height;*/
+  min-width: 70px;
+  max-width: 70px;
+  min-height: 25px;
+  text-align: center;
+}
+.cells {
+  /* no need of these as applied to .content automatically set props of .cells */
+  /* so that content only within boundaries of this div */
+  /* border: 1px solid; */
+  /* overflow: auto; */
+  /* height: calc(100vh - 170px); */
+  /*using above 2 line gives extra scroll bar*/
+  /* background: lightgreen; */
+  /* vh is the total height available to the application in current view */
+  /* done this as in original excel also we have cells adjustment only */
+  position: absolute;
+  top: 25px;
+  left: 30px;
+  background: white;
+}
+
+.content {
+  overflow: auto;
+  border: 1px solid;
+  height: calc(100vh - 170px);
+  position: relative;
+}
+
+.top-left-cell {
+  position: absolute;
+  height: 25px;
+  width: 30px;
+  background: white;
+  z-index: 3;
+}
+
+.top-row {
+  top: 0px;
+  left: 30px;
+  position: absolute;
+  display: flex;
+  background: rgb(233, 245, 255);
+  /* aliceblue */
+  z-index: 2;
+  font-family: cursive;
+}
+
+.top-row-ele {
+  border: 1px solid;
+  min-width: 70px;
+  min-height: 25px;
+  text-align: center;
+}
+
+.left-col {
+  width: 30px;
+  background: rgb(233, 245, 255);
+  position: absolute;
+  top: 25px;
+  z-index: 2;
+  font-family: cursive;
+}
+
+.left-col-ele {
+  text-align: center;
+  border: 1px solid black;
+  height: 25px;
+  width: 30px;
+
+  /* to align center in case left above */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.active {
+  display: flex;
+}
+
+.active-menu {
+  border: 1px solid black;
+  background-color: rgb(236, 236, 236);
+  padding: 4px;
+}
+
+.font-props {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#font-type {
+  /* width: 78px;
+  position: relative;
+  left: 5px;
+  bottom: 3px; */
+  width: 148px;
+}
+.font-styling {
+  justify-content: space-around;
+  display: flex;
+  position: relative;
+  left: 41px;
+  width: 141px;
+}
+#bold {
+}
+#italic {
+}
+#underline {
+}
+
+.font-color-size {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#font-size {
+  /* left: 5px;
+  width: 91px;
+  position: relative;
+  bottom: 3px;
+  height: 17px; */
+
+  position: relative;
+  left: 93px;
+}
+.cell-color {
+  position: relative;
+  left: 147px;
+}
+
+[type="color"] {
+  width: 28px;
+}
+
+.alignment {
+  /* display: flex;
+  align-items: center; */
+  left: 209px;
+  position: relative;
+}
+#left {
+}
+#center {
+}
+#right {
+}
+#logo-image {
+  height: 25px;
+  width: 30px;
+  margin-left: 10px;
+}
+
+#address {
+  margin-right: 10px;
+}
+.alignment button {
+  font-family: cursive;
+}
+#formula-image {
+  margin-left: 10px;
+  width: 24px;
+  height: auto;
+  margin-right: 10px;
+}
+.sheets {
+  align-items: center;
+  display: flex;
+  height: 40px;
+  border: 2px solid green;
+}
+.sheet-list {
+  justify-content: space-evenly;
+  align-items: center;
+  width: 32%;
+  /* to set the width and then do justify-content: accordingly to space evenly; */
+  display: flex;
+}
+#plus-image {
+  width: 10px;
+  height: auto;
+  /* this work done also by putting in a same div and calling display flex which is better */
+  /* top: -18px;
+  position: relative;
+  left: 449px; */
+}
+.sheet {
+  border-radius: 10px;
+  border: 2px solid black;
+  padding: 2px;
+}
+.active-sheet {
+  background-color: #00bcd4;
+  border-radius: 10px;
+}
+/* to give special effects to this */
+.add-button {
+}
+
+/* 
+alignt display flex then inner align items center
+size m dsipaly flex and direction colum to do accordingly align items center then increase width of size
+same as above for font size and styling
+
+lag happening in the alignment of heights of left col and cells due to border given to the top-left-cell
+*/
+
+/* ----------------ROUND SCROLL BAR-------------- */
+
+/* https://css-tricks.com/custom-scrollbars-in-webkit/ */
+/* got ti know about webkit by intellisense autocomplete */
+
+::-webkit-scrollbar {
+  /* Width of vertical scroll bar */
+  width: 8px;
+  /* Height of horizontal scroll bar */
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #c2c9d2;
+}

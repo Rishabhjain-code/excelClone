@@ -1,0 +1,43 @@
+if wanted block element in not sequential order but in one by one order change prop of its immediate div 
+display:flex
+
+basic layout of setting cells via ejs,making them flex, editable overfloe:hideen to keep thm in a plce properly
+
+NOW USE DOM TO GIVE SPECIFIC ADDRESS TO EACH cells
+when defining the cell using the ejs then give rn = <%i%> cn=<%j%>
+
+earlier dom has less function than jquery but now dom evolved itself to get good functions of the jQuery
+click event specific work using DocumentObjectModel Only OR jQUERY for small syntax
+
+FORMULA - DS PART MOST IMPORTANT
+
+s1->getCellObj
+s2->update formula of this
+s3->get a1/a2 in the formula
+s4->get objs for the above formula
+s5->cell obj updata
+s6->ui update
+
+use the infix evaulation via stack to find the output values from the input
+
+work done we did formulas focus remove then update formula for last cell calc its value by taking val from its dependency.
+
+B1 = A1 + A2
+
+NOW IF WE CHANGE A2 THEN B1 AUTOMATIC CHANGE BY 
+FOR EACH CELL STORE ITS CHILD OBJECT WHENEVER WE CHANGE ONE THEN GO TO ALL DO -OLF + NEW
+
+
+value -> value 
+ui updatr,db update,childrens update
+
+value -> formula
+formula update in db , db update parents ,solve formula ,update its children(as they depend on this), ui update
+
+
+formula -> value
+remove formula , update parents , update childrens of parents, update db value , ui update , update children
+
+formula -> formula 
+remove formula , remove yourself from parent's children , clear parent array , db update formula , db update parent , solve formula , ui update , children update
+
