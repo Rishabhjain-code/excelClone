@@ -2,11 +2,12 @@
 // const dialog = require("electron").remote.dialog;
 const fs = require("fs");
 
+let pathBox = $("#box");
+
 $("document").ready(function () {
     let db;
     let lastSelectedCell;
 
-    // console.log("Hello");
     // to all cell add event listener of type click and what happens then
     $(".cell").on("click", function () {
         // console.log("Cell is clicked")
@@ -67,50 +68,62 @@ $("document").ready(function () {
         }
     })
 
-    $(".open").on("click", function () {
+    pathBox.css('opacity', '0');
+
+    /* The Event interface's preventDefault() method tells the user agent that if the event does not get explicitly handled, its default action should not be taken as it normally would be. The event continues to propagate as usual, unless one of its event listeners calls stopPropagation() or stopImmediatePropagation(), either of which terminates propagation at once */
+    $(".open").on("click", function (e) {
         console.log("open clicked");
-        let filePaths = dialog.showOpenDialogSync();
-        let data = fs.readFileSync(filePaths[0]);
+        e.preventDefault();
+        pathBox.trigger('click');
+        pathBox.on("change", function () {
+            let path = pathBox.value;
+            console.log(path);
+            let data = fs.readFileSync(path);
 
-        // sheetDb set
-        sheetsDb = JSON.parse(data);
+            // sheetDb set
+            sheetsDb = JSON.parse(data);
 
-        // db set
-        // db = JSON.parse(data);
+            // db set
+            // db = JSON.parse(data);
 
-        //ui update
+            //ui update
 
-        db = sheetsDb[0].db;
-        //first sheet is opened
-        for (let i = 0; i < 100; i++) {
-            for (let j = 0; j < 26; j++) {
-                let thatDiv = $(`.cell[rn="${i}"][cn="${j}"]`);
-                thatDiv.text(db[i][j].value);
+            db = sheetsDb[0].db;
+            //first sheet is opened
+            for (let i = 0; i < 100; i++) {
+                for (let j = 0; j < 26; j++) {
+                    let thatDiv = $(`.cell[rn="${i}"][cn="${j}"]`);
+                    thatDiv.text(db[i][j].value);
+                }
             }
-        }
 
-        // for others just add their buttons/html with proper event listener so that when they clicked they can load their respective databases
+            // for others just add their buttons/html with proper event listener so that when they clicked they can load their respective databases
 
-        for (let i = 1; i < sheetsDb.length; i++) {
-            let sheetObject = sheetsDb[i];
-            let divToBeAdded = document.createElement('div');
-            let allSheets = $(".sheet");
-            $(divToBeAdded).addClass("sheet");
-            $(divToBeAdded).on("click", sheetClick);
-            //added the event listener
-            divToBeAdded.innerText = sheetObject.name;
-            $(allSheets[allSheets.length - 1]).after(divToBeAdded);
-        }
+            for (let i = 1; i < sheetsDb.length; i++) {
+                let sheetObject = sheetsDb[i];
+                let divToBeAdded = document.createElement('div');
+                let allSheets = $(".sheet");
+                $(divToBeAdded).addClass("sheet");
+                $(divToBeAdded).on("click", sheetClick);
+                //added the event listener
+                divToBeAdded.innerText = sheetObject.name;
+                $(allSheets[allSheets.length - 1]).after(divToBeAdded);
+            }
+        })
     })
 
-    $(".save").on("click", function () {
+    $(".save").on("click", function (e) {
         console.log("Save clicked");
-        let filesPath = dialog.showSaveDialogSync();
-        //it returns 1 path an array returned for open
-        console.log(filesPath[0]);
-        let data = JSON.stringify(sheetsDb);
-        fs.writeFileSync(filesPath, data);
-        alert("files save!");
+        e.preventDefault();
+        pathBox.trigger('click');
+        pathBox.on("change", function () {
+            let filesPath = pathBox.value;
+            console.log(filesPath);
+            filesPath = "./db/users.json";
+            let data = JSON.stringify(sheetsDb);
+            fs.writeFileSync(filesPath, data);
+            alert("files save!");
+        })
     })
 
     //when focus is removed from cell
@@ -121,7 +134,7 @@ $("document").ready(function () {
         // means some formula as a key is stored for that cell => formula to value
         // from div take value via.text() from input use .val()
 
-        console.log(this);
+        // console.log(this);
         // this has the element with all its attribute
         lastSelectedCell = this; //to update it via formula later
         let value = $(this).text(); //in ui
@@ -159,8 +172,8 @@ $("document").ready(function () {
 
             if (!cirular) {
                 updateChildrensValue(cellObject);
-                console.log(cellObject);
-                console.log(db);
+                // console.log(cellObject);
+                // console.log(db);
             }
         }
 
@@ -253,7 +266,7 @@ $("document").ready(function () {
             updateChildrensValue(cellObject);
             $(lastSelectedCell).text(value);
         }
-        console.log(db);
+        // console.log(db);
     }
 
     //DONT USE TAB AS IT REMOVES FOCUS BUT NOT CHANGES THE ADDRESS
@@ -328,7 +341,7 @@ $("document").ready(function () {
                 colId
             } = getRCIdFromAddress(childAddress);
             let child = db[rowId][colId];
-            console.log(child + child.formula);
+            // console.log(child + child.formula);
             let value = solveFormula(child.formula);
             //db update
             db[rowId][colId].value = value;
@@ -436,14 +449,14 @@ $("document").ready(function () {
     document.querySelector("#cell-font").addEventListener("change", watchColorPickerFont, false);
 
     function watchColorPickerFont(event) {
-        console.log("Hello");
+
         lastSelectedCell.style.color = event.target.value;
     }
 
     document.querySelector("#cell-background").addEventListener("change", watchColorPickerBackground, false);
 
     function watchColorPickerBackground(event) {
-        console.log("Hello");
+
         lastSelectedCell.style.backgroundColor = event.target.value;
         // as in js we have nearly same name as css just no - is used use style before it and use of Camel Casing Convention
     }
@@ -524,7 +537,7 @@ $("document").ready(function () {
     $(".add-button").on("click", function () {
         let ndb = init();
         let sheetObject = {
-            name: `Sheet ${sheetsDb.length+1}`,
+            name: `Sheet ${sheetsDb.length + 1}`,
             db: ndb
         };
         let divToBeAdded = document.createElement('div');
@@ -601,7 +614,7 @@ $("document").ready(function () {
 //use childrens and parents by 2 functions
 /* update val to val's children that I got changed you re evalutate yourself using formula thus do in cell blur event listener
     recursive as update all b to a c on b thus dfs type code
-    
+
     no again update children and parent update thus do properly not pass cellObject and do update only for no fallasy case
     update on db and ui also
 */
