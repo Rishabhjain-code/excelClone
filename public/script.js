@@ -1,4 +1,4 @@
-const $ = require("jquery");
+// const $ = require("jquery");
 // const dialog = require("electron").remote.dialog;
 const fs = require("fs");
 

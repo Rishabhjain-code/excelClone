@@ -6,7 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Electron App</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
+        integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg=="
+        crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="browserfs.min.js"></script>
+    <script type="text/javascript">
+        // Installs globals onto window:
+        // * Buffer
+        // * require (monkey-patches if already defined)
+        // * process
+        // You can pass in an arbitrary object if you do not wish to pollute
+        // the global namespace.
+        BrowserFS.install(window);
+        // Configures BrowserFS to use the LocalStorage file system.
+        BrowserFS.configure({
+            fs: "LocalStorage"
+        }, function (e) {
+            if (e) {
+                // An error happened!
+                throw e;
+            }
+            // Otherwise, BrowserFS is ready-to-use!
+        });
+    </script>
 </head>
 
 <body>
@@ -41,8 +64,9 @@
 
             <select name="" id="font-size">
                 <%for(let i=10;i<42;i+=2){%>
-                <option value=<%=i%>><%=i%></option>
-                <%}%>
+                    <option value=<%=i%>><%=i%>
+                    </option>
+                    <%}%>
             </select>
             <div class="cell-color">
                 <!-- https://www.w3schools.com/tags/att_input_type_color.asp#:~:text=The%20%3Cinput%20type%3D%22color,in%20seven%2Dcharacter%20hexadecimal%20notation. -->
@@ -77,26 +101,28 @@
             <!-- top row 26 cols for A,B,C,D...-->
             <div class="top-row">
                 <%for(let j=0;j<26;j++){%>
-                <div class="top-row-ele" cn=<%=j%>><%=(String.fromCharCode(j+65))%></div>
-                <%}%>
+                    <div class="top-row-ele" cn=<%=j%>><%=(String.fromCharCode(j+65))%>
+                    </div>
+                    <%}%>
             </div>
 
             <!-- left col-->
             <div class="left-col">
                 <%for(let j=0;j<100;j++){%>
-                <div class="left-col-ele" rn=<%=j%>><%=(j+1)%></div>
-                <%}%>
+                    <div class="left-col-ele" rn=<%=j%>><%=(j+1)%>
+                    </div>
+                    <%}%>
             </div>
 
             <div class="cells">
                 <%for(let i=0;i<100;i++){%>
-                <div class="row">
-                    <%for(let j=0;j<26;j++){%>
-                    <div contenteditable="true" class="cell" rn=<%=i%> cn=<%=j%>></div>
+                    <div class="row">
+                        <%for(let j=0;j<26;j++){%>
+                            <div contenteditable="true" class="cell" rn=<%=i%> cn=<%=j%>></div>
+                            <%}%>
+                    </div>
                     <%}%>
-                </div>
-                    <%}%>
-                </div>
+            </div>
         </div>
     </div>
 
