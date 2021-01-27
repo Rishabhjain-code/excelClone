@@ -1,6 +1,6 @@
-const $ = require("jquery");
+// const $ = require("jquery");
 // const dialog = require("electron").remote.dialog;
-const fs = require("fs");
+// const fs = require("fs");
 
 $("document").ready(function () {
     let db;
